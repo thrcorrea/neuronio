@@ -10,6 +10,8 @@ const port = process.env.PORT;
 
 const app = express();
 
+const UsersRoutes = require('./routes/users');
+
 app.use(helmet());
 app.use(cors());
 app.use(bodyParser.json());
@@ -18,6 +20,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/status', (req, res) => {
   res.send('ok');
 });
+
+app.use('/users', UsersRoutes);
 
 app.listen(port, () => {
   winston.info(`Servidor ouvindo na porta ${port}`);
