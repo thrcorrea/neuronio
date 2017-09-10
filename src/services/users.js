@@ -1,12 +1,10 @@
+const UsersModel = require('../models/users');
+const weDeploy = require('wedeploy');
+
 exports.listUsers = function _listUsers() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      return resolve([
-        {
-          id: 1,
-          name: 'thales'
-        }
-      ]);
-    }, 100);
-  });
+  return UsersModel.listUsers(weDeploy);
+};
+
+exports.insertUser = function _inserUser(user) {
+  return UsersModel.insertUser(weDeploy, user);
 };
