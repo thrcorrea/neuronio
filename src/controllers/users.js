@@ -1,5 +1,15 @@
 const UserService = require('../services/users');
 
+exports.getUser = function _getUser(req, res) {
+  return UserService.getUser(req.params.user)
+    .then(data => {
+      res.send({ success: true, data });
+    })
+    .catch(err => {
+      res.send({ success: false, err });
+    });
+};
+
 exports.listUsers = function _listUsers(req, res) {
   return UserService.listUsers()
     .then(data => {
@@ -10,7 +20,7 @@ exports.listUsers = function _listUsers(req, res) {
     });
 };
 
-function insertUser(req, res) {
+exports.insertUser = function _insertUser(req, res) {
   UserService.insertUser(req.body)
     .then(data => {
       res.send({ success: true, data });
@@ -18,9 +28,9 @@ function insertUser(req, res) {
     .catch(err => {
       res.send({ success: false, err });
     });
-}
+};
 
-function updateUser(req, res) {
+exports.updateUser = function _updateUser(req, res) {
   UserService.updateUser(req.params.user, req.body)
     .then(data => {
       res.send({ success: true, data });
@@ -28,21 +38,14 @@ function updateUser(req, res) {
     .catch(err => {
       res.send({ success: false, err });
     });
-}
+};
 
-function deleteUser(req, res) {
-  UserService.deleteUser(req.params.id)
-    .then(data => {
-      res.send({ success: true, data });
+exports.deleteUser = function _deleteUser(req, res) {
+  UserService.deleteUser(req.params.user)
+    .then(() => {
+      res.send({ success: true });
     })
     .catch(err => {
       res.send({ success: false, err });
     });
-}
-
-// module.exports = {
-//   listUsers,
-//   insertUser,
-//   updateUser,
-//   deleteUser
-// };
+};
