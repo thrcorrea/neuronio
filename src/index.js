@@ -11,6 +11,7 @@ const port = process.env.PORT;
 const app = express();
 
 const UsersRoutes = require('./routes/users');
+const LoginRoutes = require('./routes/login');
 
 app.use(helmet());
 app.use(cors());
@@ -22,6 +23,7 @@ app.get('/status', (req, res) => {
 });
 
 app.use('/users', UsersRoutes);
+app.use('/login', LoginRoutes);
 
 app.listen(port, () => {
   winston.info(`Servidor ouvindo na porta ${port}`);

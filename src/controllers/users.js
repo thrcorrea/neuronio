@@ -32,12 +32,8 @@ exports.insertUser = function _insertUser(req, res) {
 
 exports.updateUser = function _updateUser(req, res) {
   UserService.updateUser(req.params.user, req.body)
-    .then(data => {
-      res.send({ success: true, data });
-    })
-    .catch(err => {
-      res.send({ success: false, err });
-    });
+    .then(data => res.send({ success: true, data }))
+    .catch(err => res.send({ success: false, err }));
 };
 
 exports.deleteUser = function _deleteUser(req, res) {
