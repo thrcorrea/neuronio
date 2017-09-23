@@ -5,8 +5,8 @@ const passport = require('../auth/passport');
 const router = express.Router();
 
 router.post('/', LoginController.login);
-router.post('/facebook', passport.authenticate('facebook', { session: false }));
-router.post(
+router.get('/facebook', passport.authenticate('facebook', { session: false }));
+router.get(
   '/facebook/return',
   passport.authenticate('facebook', { session: false }),
   LoginController.loginFacebook
