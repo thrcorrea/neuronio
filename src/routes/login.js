@@ -12,7 +12,10 @@ router.get(
   LoginController.loginFacebook
 );
 
-router.get('/google', passport.authenticate('google', { session: false }));
+router.get(
+  '/google',
+  passport.authenticate('google', { scope: ['profile'], session: false })
+);
 router.get(
   '/google/return',
   passport.authenticate('google', { session: false }),
