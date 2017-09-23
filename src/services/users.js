@@ -23,7 +23,7 @@ exports.findOrCreateFacebook = function _findOrCreateFacebook(profile) {
 };
 
 exports.findOrCreateGoogle = function _findOrCreateGoogle(profile) {
-  return UsersModel.findUseByGoogle(weDeploy, profile).then(user => {
+  return UsersModel.findUserByGoogle(weDeploy, profile).then(user => {
     if (user) return user;
     return UsersModel.insertUser(weDeploy, {
       name: profile.displayName,
