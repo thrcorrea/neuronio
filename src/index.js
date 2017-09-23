@@ -19,7 +19,6 @@ app.use(helmet());
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(passport.initialize());
 
 app.get('/status', (req, res) => {
