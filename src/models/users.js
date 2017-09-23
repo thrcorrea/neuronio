@@ -7,13 +7,15 @@
 
 */
 
-const databaseUrl = 'https://database-neuroniohomolog.wedeploy.io';
+require('dotenv').config();
+
+const databaseUrl = process.env.DATABASE_URL;
 
 exports.insertUser = function _insertUser(database, user) {
   return database
     .data(databaseUrl)
     .create('users', user)
-    .then(insertedUser => console.log(insertedUser));
+    .then(insertedUser => insertedUser);
 };
 
 exports.listUsers = function _listUsers(database) {

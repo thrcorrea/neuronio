@@ -12,6 +12,7 @@ const app = express();
 
 const UsersRoutes = require('./routes/users');
 const LoginRoutes = require('./routes/login');
+const StatementsRoutes = require('./routes/statments');
 
 app.use(helmet());
 app.use(cors());
@@ -24,6 +25,7 @@ app.get('/status', (req, res) => {
 
 app.use('/users', UsersRoutes);
 app.use('/login', LoginRoutes);
+app.use('/statements', StatementsRoutes);
 
 app.listen(port, () => {
   winston.info(`Servidor ouvindo na porta ${port}`);
