@@ -14,7 +14,10 @@ router.get(
 
 router.get(
   '/google',
-  passport.authenticate('google', { scope: ['profile'], session: false })
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+    session: false
+  })
 );
 router.get(
   '/google/return',

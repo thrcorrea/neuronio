@@ -12,6 +12,14 @@ exports.insertUser = function _inserUser(user) {
   return UsersModel.insertUser(weDeploy, newUser);
 };
 
+exports.createOrUpdate = function _createOrUpdate(user) {
+  return UsersModel.findUserByEmail(weDeploy, user).then(foundUser => {
+    console.log(foundUser);
+    if (foundUser) return UsersModel.updateUser(weDeploy, foundUser.id, user);
+    return UsersModel.insertUser(weDeploy, user);
+  });
+};
+
 exports.findOrCreateFacebook = function _findOrCreateFacebook(profile) {
   return UsersModel.findUserByFacebook(weDeploy, profile).then(user => {
     if (user) return user;

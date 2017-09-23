@@ -42,7 +42,9 @@ exports.updateUser = function _updateUser(database, userId, user) {
   return database
     .data(databaseUrl)
     .update(`users/${userId}`, user)
-    .then(updatedUser => updatedUser);
+    .then(updatedUser => {
+      return user;
+    });
 };
 
 exports.findUserByEmail = function _findUserByEmail(database, user) {

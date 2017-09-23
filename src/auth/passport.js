@@ -32,9 +32,18 @@ passport.use(
     },
     function(accessToken, refreshToken, profile, callback) {
       console.log('GOOGLE:', profile);
-      UsersService.findOrCreateGoogle(profile)
-        .then(user => {
-          return callback(null, user);
+      const user = Object.assign(
+        {},
+        {
+          googleId: profile.id,
+          email: profile.emails[0].value,
+          name: profile.displayName
+        }
+      );
+      UsersService.createOrUpdate(user)
+        .then(newUser => {
+          console.log('NEW USer', newUser);
+          return callback(null, newUser);
         })
         .catch(err => callback(err));
     }
