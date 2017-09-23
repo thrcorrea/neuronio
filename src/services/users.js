@@ -14,7 +14,6 @@ exports.insertUser = function _inserUser(user) {
 
 exports.createOrUpdate = function _createOrUpdate(user) {
   return UsersModel.findUserByEmail(weDeploy, user).then(foundUser => {
-    console.log(foundUser);
     if (foundUser) return UsersModel.updateUser(weDeploy, foundUser.id, user);
     return UsersModel.insertUser(weDeploy, user);
   });

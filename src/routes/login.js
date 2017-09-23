@@ -5,10 +5,15 @@ const passport = require('../auth/passport');
 const router = express.Router();
 
 router.post('/', LoginController.login);
-router.get('/facebook', passport.authenticate('facebook', { session: false }));
+router.get(
+  '/facebook',
+  passport.authenticate('facebook', { scope: ['email'], session: false })
+);
 router.get(
   '/facebook/return',
-  passport.authenticate('facebook', { session: false }),
+  passport.authenticate('facebook', {
+    session: false
+  }),
   LoginController.loginFacebook
 );
 

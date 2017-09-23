@@ -8,13 +8,22 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: `${process.env.baseUrl}/login/facebook/return`
+      callbackURL: `${process.env.baseUrl}/login/facebook/return`,
+      profileFields: ['id', 'email', 'name']
     },
     function(accessToken, refreshToken, profile, callback) {
       console.log(profile);
-      UsersService.findOrCreateFacebook(profile)
-        .then(user => {
-          return callback(null, user);
+      const user = Object.assign(
+        {},
+        {
+          facebookId: profile.id,
+          email: profile.emails[0].value,
+          name: profile.displayName
+        }
+      );
+      UsersService.createOrUpdate(user)
+        .then(newUser => {
+          return callback(null, newUser);
         })
         .catch(err => {
           return callback(err);
