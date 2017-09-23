@@ -32,7 +32,7 @@ exports.login = function _login(user) {
 };
 
 exports.loginFacebook = function _loginFacebook(req, res, next) {
-  return encodeToken(req.user);
+  return Promise.resolve(encodeToken(req.user));
 };
 
 exports.isAuthenticated = function _isAuthenticated(req, res, next) {
