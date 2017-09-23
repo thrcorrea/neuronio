@@ -31,6 +31,7 @@ passport.use(
       callbackURL: `${process.env.baseUrl}/login/google/return`
     },
     function(accessToken, refreshToken, profile, callback) {
+      console.log('GOOGLE:', profile);
       UsersService.findOrCreateGoogle(profile)
         .then(user => {
           return callback(null, user);
