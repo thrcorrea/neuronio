@@ -55,6 +55,16 @@ exports.findUserByEmail = function _findUserByEmail(database, user) {
     });
 };
 
+exports.findUserByGoogle = function _findUserByGoogle(database, profile) {
+  return database
+    .data(databaseUrl)
+    .where('googleId', '=', profile.id)
+    .get('users')
+    .then(foundUser => {
+      return foundUser[0] || null;
+    });
+};
+
 exports.findUserByFacebook = function _findUserByFacebook(database, profile) {
   return database
     .data(databaseUrl)

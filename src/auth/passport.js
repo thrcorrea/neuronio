@@ -1,5 +1,6 @@
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook');
+const GoogleStrategy = require('passport-google-oauth20');
 const UsersService = require('../services/users');
 
 passport.use(
@@ -18,6 +19,23 @@ passport.use(
         .catch(err => {
           return callback(err);
         });
+    }
+  )
+);
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_APP_ID,
+      clientSecret: process.env.GOOGLE_APP_SECRET,
+      callbackURL: `${process.env.baseUrl}/login/google/return`
+    },
+    function(accessToken, refreshToken, profile, callback) {
+      UsersService.findOrCreateGoogle(profile)
+        .then(user => {
+          return callback(null, user);
+        })
+        .catch(err => callback(err));
     }
   )
 );

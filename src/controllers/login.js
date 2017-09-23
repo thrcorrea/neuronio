@@ -13,3 +13,9 @@ exports.loginFacebook = function _loginFacebook(req, res, next) {
     .then(token => res.send({ success: true, token }))
     .catch(err => res.send({ success: false, err: err.message }));
 };
+
+exports.loginGoogle = function _loginGoogle(req, res, next) {
+  LoginService.loginGoogle(req, res, next)
+    .then(token => res.send({ success: true, token }))
+    .catch(err => res.send({ success: false, err: err.message }));
+};

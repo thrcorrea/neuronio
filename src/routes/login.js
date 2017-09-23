@@ -12,4 +12,11 @@ router.get(
   LoginController.loginFacebook
 );
 
+router.get('/google', passport.authenticate('google', { session: false }));
+router.get(
+  '/google/return',
+  passport.authenticate('google', { session: false }),
+  LoginController.loginGoogle
+);
+
 module.exports = router;
