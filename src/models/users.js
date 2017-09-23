@@ -2,7 +2,8 @@
   User {
     name,
     email,
-    password
+    password,
+    facebookId,
   }
 
 */
@@ -52,4 +53,12 @@ exports.findUserByEmail = function _findUserByEmail(database, user) {
     .then(foundUser => {
       return foundUser[0] || null;
     });
+};
+
+exports.findUserByFacebook = function _findUserByFacebook(database, profile) {
+  return database
+    .data(databaseUrl)
+    .where('facebookId', '=', profile.id)
+    .get('users')
+    .then(user => user[0] || null);
 };

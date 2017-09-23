@@ -5,6 +5,7 @@ const winston = require('winston');
 const helmet = require('helmet');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const passport = require('./auth/passport');
 
 const port = process.env.PORT;
 
@@ -18,6 +19,7 @@ app.use(helmet());
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
 
 app.get('/status', (req, res) => {
   res.send('ok');

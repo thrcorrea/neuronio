@@ -31,6 +31,10 @@ exports.login = function _login(user) {
   });
 };
 
+exports.loginFacebook = function _loginFacebook(req, res, next) {
+  return encodeToken(req.user);
+};
+
 exports.isAuthenticated = function _isAuthenticated(req, res, next) {
   if (!req.headers || !req.headers.authorization) {
     return res.status(401).send({ success: false, message: 'Please log in!' });

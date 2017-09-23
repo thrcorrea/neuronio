@@ -12,6 +12,13 @@ exports.insertUser = function _inserUser(user) {
   return UsersModel.insertUser(weDeploy, newUser);
 };
 
+exports.findOrCreateFacebook = function _findOrCreateFacebook(profile) {
+  return UsersModel.findUserByFacebook(weDeploy, profile).then(user => {
+    if (user) return user;
+    return UsersModel.insertUser(weDeploy, { facebookId: profile.id });
+  });
+};
+
 exports.getUser = function _getUser(userId) {
   return UsersModel.getUser(weDeploy, userId);
 };
