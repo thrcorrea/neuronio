@@ -10,6 +10,16 @@ exports.getUser = function _getUser(req, res) {
     });
 };
 
+exports.getMeUser = function _getMeUser(req, res) {
+  return UserService.getUser(req.user)
+    .then(data => {
+      res.send({ success: true, data });
+    })
+    .catch(err => {
+      res.send({ success: false, err });
+    });
+};
+
 exports.listUsers = function _listUsers(req, res) {
   return UserService.listUsers()
     .then(data => {
