@@ -4,14 +4,17 @@ const LoginService = require('../services/login');
 
 const router = express.Router();
 
-router.post('/', UsersController.insertUser);
+router
+  .route('/:user')
+  .get(LoginService.isAuthenticated, UsersController.getUser)
+  .put(LoginService.isAuthenticated, UsersController.updateUser)
+  .delete(LoginService.isAuthenticated, UsersController.deleteUser);
 
-router.use(LoginService.isAuthenticated);
+router
+  .route('/')
+  .get(LoginService.isAuthenticated, UsersController.listUsers)
+  .post(UsersController.insertUser);
 
-router.get('/', UsersController.listUsers);
-router.get('/:user', UsersController.getUser);
 router.get('/me', UsersController.getMeUser);
-router.put('/:user', UsersController.updateUser);
-router.delete('/:user', UsersController.deleteUser);
 
 module.exports = router;
