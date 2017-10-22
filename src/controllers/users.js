@@ -13,7 +13,7 @@ exports.getUser = function _getUser(req, res) {
 exports.getMeUser = function _getMeUser(req, res) {
   return UserService.getUser(req.user)
     .then(data => {
-      res.send({ success: true, data });
+      res.send({ success: true, data: data[0] });
     })
     .catch(err => {
       res.send({ success: false, err });
