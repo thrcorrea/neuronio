@@ -9,4 +9,8 @@ router.use(LoginService.isAuthenticated);
 router.get('/', StatementsController.listStatementsByUser);
 router.post('/', StatementsController.insertStatement);
 
+router
+  .route('/me')
+  .get(LoginService.isAuthenticated, StatementsController.getMyStatements);
+
 module.exports = router;

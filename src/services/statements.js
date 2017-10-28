@@ -9,7 +9,11 @@ function updateUserBalance(statement) {
     .then(users => {
       if (!users[0]) return new Error('Usuário não encontrado');
       user = users[0];
-      user.balance += statement.amount;
+      if (user.balance) {
+        user.balance += statement.amount;
+      } else {
+        user.balance = statement.amount;
+      }
     })
     .then(() => UsersModel.updateUser(weDeploy, statement.userId, user));
 }
