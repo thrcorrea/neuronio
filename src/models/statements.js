@@ -1,8 +1,7 @@
 /*
   Statement {
     userId ,
-    credit ,
-    debit ,
+    amount ,
     description ,
     dateTime ,
     type ,

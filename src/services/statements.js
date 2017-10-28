@@ -1,6 +1,18 @@
 const StatementsModel = require('../models/statements');
+const UsersModel = require('../models/users');
 const weDeploy = require('wedeploy');
 const moment = require('moment');
+
+function updateUserBalance(statement) {
+  let user;
+  return UsersModel.getUser(weDeploy, statement.userId)
+    .then(users => {
+      if (!users[0]) return new Error('Usuário não encontrado');
+      user = users[0];
+      user.balance += statement.amount;
+    })
+    .then(() => UsersModel.updateUser(weDeploy, statement.userId, user));
+}
 
 exports.listStatementsByUser = function _listStatementsByUser(userId) {
   return StatementsModel.listStatementsByUser(weDeploy, userId);
@@ -14,5 +26,9 @@ exports.insertStatement = function _insertStatement(statement) {
     statement
   );
 
-  return StatementsModel.insertStatement(weDeploy, insertStatement);
+  return updateUserBalance(statement)
+    .then(() => StatementsModel.insertStatement(weDeploy, insertStatement))
+    .then(insertedStatement => {
+      return insertedStatement;
+    });
 };
