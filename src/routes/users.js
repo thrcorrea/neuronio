@@ -6,7 +6,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(LoginService.isAuthenticated, UsersController.listUsers)
+  .get(UsersController.listUsers)
   .post(UsersController.insertUser);
 
 router
