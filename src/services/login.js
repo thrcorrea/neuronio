@@ -2,9 +2,13 @@ const jwt = require('jsonwebtoken');
 const UserService = require('./users');
 
 function encodeToken(user) {
-  return jwt.sign({ sub: user.id }, process.env.JWT_SECRET, {
-    expiresIn: '2h'
-  });
+  return jwt.sign(
+    { sub: user.id, admin: user.admin || false },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: '2h'
+    }
+  );
 }
 
 function decodeToken(token, callback) {
