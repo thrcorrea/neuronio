@@ -6,8 +6,8 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(UsersController.listUsers)
-  .post(UsersController.insertUser);
+  .get(LoginService.isAuthenticated, UsersController.listUsers)
+  .post(LoginService.isAuthenticated, UsersController.insertUser);
 
 router
   .route('/me')
